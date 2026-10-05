@@ -27,11 +27,11 @@ export default function ServiceCard({
           {title}
         </h3>
 
-        <p className="mt-2 text-sm text-blue-500">
+        <p className="mt-2 text-sm text-[#64748B]">
           {description}
         </p>
 
-        <p className="mt-4 text-xs text-slate-400">
+        <p className="mt-4 text-xs text-[#64748B] font-semibold">
           {providers} providers
         </p>
       </div>

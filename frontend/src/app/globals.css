@@ -1,1 +1,11 @@
-@import "tailwindcss"
+@font-face {
+    font-family: "Smooch Sans";
+    src: url("../assets/fonts/SmoochSans-Regular.ttf");
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --font-smooch: "Smooch Sans", sans-serif;
+}
