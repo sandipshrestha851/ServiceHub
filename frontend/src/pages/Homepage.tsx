@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from '../components/layout/Navbar'
 import Carausel from '../components/home/Carausel'
 import Services from '../components/home/Services'
+import Steps from '../components/home/Steps'
 
 const homepage = () => {
   return (
@@ -10,6 +11,7 @@ const homepage = () => {
         <Navbar/>
         <Carausel/>
         <Services/>
+        <Steps/>
     </div>
   )
 }

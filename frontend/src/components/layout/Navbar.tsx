@@ -7,7 +7,7 @@ import {usePathname} from 'next/navigation';
 const Navbar = () => {
   return (
     <div>
-      <div className="navbar flex justify-between px-8 py-6 border-b border-b-[#E2E8F0] sticky">
+      <div className="navbar flex justify-between px-40 py-6 border-b border-b-[#E2E8F0] sticky">
         <div className="left-items flex flex-col gap-5">
             <div className="logo">
                 <img src="/images/logo.png" alt="logo" className="w-40 cursor-pointer" />

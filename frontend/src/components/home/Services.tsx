@@ -15,7 +15,7 @@ const Services = () => {
     return (
         <div className="services mt-20 mx-40">
             <div className="headers flex flex-col gap-2.5">
-                <p className="text-[#2563EB] font-smooch text-xl font-semibold">EXPLORE SERVICES</p>
+                <p className="text-[#2563EB] font-smooch text-xl font-semibold tracking-[5px]">EXPLORE SERVICES</p>
                 <h2 className="text-3xl font-bold font-poppins">What can we help with?</h2>
                 <p className="text-[#64748B] font-poppins">Whatever the job find the right person for it.</p>
             </div>
