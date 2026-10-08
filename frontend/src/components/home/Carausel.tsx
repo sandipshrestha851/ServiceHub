@@ -51,7 +51,7 @@ const carausel = () => {
 
                 <div className="search-section relative flex bg-white w-148 h-16 items-center rounded-full z-10">
                     <div className="long-part w-[70%]">
-                        <input type="text" name="serch-services" id="" className="border-r border-r-[#E2E8F0] p-2.5 w-full pl-6 text-lg outline-none focus:outline-none focus:ring-0" placeholder="What can we help you with?" />
+                        <input type="text" name="serch-services" id="" className="border-rk border-r-[#E2E8F0] p-2.5 w-full pl-6 text-lg outline-none focus:outline-none focus:ring-0" placeholder="What can we help you with?" />
                     </div>
                     <div className="location-part w-[20%] flex items-center pl-2 mr-1">
                         <MapPin className="w-11" />
