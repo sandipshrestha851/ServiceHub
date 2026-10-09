@@ -5,6 +5,7 @@ import Carausel from '../components/home/Carausel'
 import Services from '../components/home/Services'
 import Steps from '../components/home/Steps'
 import Providers from '../components/home/Providers'
+import AboutSection from '../components/home/About'
 
 const homepage = () => {
   return (
@@ -14,6 +15,7 @@ const homepage = () => {
         <Services/>
         <Steps/>
         <Providers/>
+        <AboutSection/>
     </div>
   )
 }
