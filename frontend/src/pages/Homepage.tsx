@@ -6,6 +6,7 @@ import Services from '../components/home/Services'
 import Steps from '../components/home/Steps'
 import Providers from '../components/home/Providers'
 import AboutSection from '../components/home/About'
+import FeedbackSection from '../components/home/Feedback'
 
 const homepage = () => {
   return (
@@ -16,6 +17,7 @@ const homepage = () => {
         <Steps/>
         <Providers/>
         <AboutSection/>
+        <FeedbackSection/>
     </div>
   )
 }

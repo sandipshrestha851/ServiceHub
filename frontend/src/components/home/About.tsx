@@ -27,7 +27,7 @@ const about = () => {
                     </p>
 
                     <button
-                        className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_5px_14px_rgba(37,99,235,0.18)] transition-all hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+                        className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_5px_14px_rgba(37,99,235,0.18)] transition-all hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer"
                     >
                         Learn more
 
