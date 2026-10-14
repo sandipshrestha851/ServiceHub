@@ -1,14 +1,15 @@
 import React from 'react'
 import {Star} from 'lucide-react'
+import FeedbackCard from '../ui/FeedbackCard'
 
 const Feedback = () => {
   return (
-    <section className="mt-20 mx-40">
+    <section className="my-20 mx-40">
         {/* header */}
         <div className="headers space-y-2.5">
             {/* part-1 */}
             <div className="part-1">
-                <p className="tracking-[5px] uppercase text-[#2563EB] text-lg">loved by customers</p>
+                <p className="tracking-[5px] uppercase text-[#2563EB] text-lg font-bold">loved by customers</p>
             </div>
 
             {/* part-2 */}
@@ -21,8 +22,8 @@ const Feedback = () => {
                 </p>
             </div>
         </div>
-        <div className="FeedbackContainer">
-            
+        <div className="FeedbackContainer mt-5 grid grid-cols-3">
+            <FeedbackCard name="Sandip Shrestha" FeedbackText="I found a trusted plumber in less than five minutes. The whole experience was clear, quick, and professional."/>
         </div>
     </section>
   )
