@@ -4,7 +4,7 @@ import FeedbackCard from '../ui/FeedbackCard'
 
 const Feedback = () => {
     return (
-        <section className="my-20 mx-40">
+        <section className="mt-20 mx-40">
             {/* header */}
             <div className="headers space-y-2.5">
                 {/* part-1 */}

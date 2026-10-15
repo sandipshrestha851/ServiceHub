@@ -7,6 +7,8 @@ import Steps from '../components/home/Steps'
 import Providers from '../components/home/Providers'
 import AboutSection from '../components/home/About'
 import FeedbackSection from '../components/home/Feedback'
+import ProviderBanner from '../components/ui/ProviderBanner'
+import Footer from '../components/layout/Footer'
 
 const homepage = () => {
   return (
@@ -18,6 +20,8 @@ const homepage = () => {
         <Providers/>
         <AboutSection/>
         <FeedbackSection/>
+        <ProviderBanner/>
+        <Footer/>
     </div>
   )
 }
