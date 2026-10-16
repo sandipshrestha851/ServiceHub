@@ -12,7 +12,7 @@ import Footer from '../components/layout/Footer'
 
 const homepage = () => {
   return (
-    <div className="bg-[#F8FAFC]">
+    <div className="bg-[#F8FAFC] h-screen overflow-y-auto scroll-smooth">
         <Navbar/>
         <Carausel/>
         <Services/>

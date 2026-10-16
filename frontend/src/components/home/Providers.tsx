@@ -3,7 +3,7 @@ import ProviderCard from '../ui/ProviderCard'
 
 const Providers = () => {
     return (
-        <div className="providers_section mt-20 mx-40">
+        <div className="providers_section mt-20 mx-40" id="providers">
             {/* headings */}
             <div className="headings space-y-2">
                 <p className="text-lg text-[#2563EB] tracking-[5px] uppercase font-bold">meet the pros</p>

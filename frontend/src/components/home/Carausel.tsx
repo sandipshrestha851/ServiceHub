@@ -20,7 +20,7 @@ const carausel = () => {
     }, []);
 
     return (
-        <div className="carausel-container h-100 relative">
+        <div className="carausel-container h-100 relative" id="home">
             <div className={`${visibleItem == 1 ? "visible" : "invisible"} carauselItem-1 w-full absolute inset-0 h-full`}>
                 <img src="/images/carausel-images/item-1.png" alt="" className="object-cover h-full w-full" />
             </div>

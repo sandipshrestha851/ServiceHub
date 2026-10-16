@@ -3,7 +3,7 @@ import {Search,UserRound,Calendar,Check} from 'lucide-react'
 
 const steps = () => {
   return (
-    <div className="steps mt-20 px-40 flex flex-col items-center bg-white py-20 border border-t-[#e2e8f0] border-b-[#E2E8F0]">
+    <div className="steps mt-20 px-40 flex flex-col items-center bg-white py-20 border border-t-[#e2e8f0] border-b-[#E2E8F0]" id="how_it_works">
       <div className="headers flex flex-col items-center gap-1.5"> 
         <p className="text-lg text-[#64748B] font-semibold tracking-[3px] uppercase">simple by design</p>
         <h2 className="text-3xl font-bold">Get it done four easy steps</h2>
