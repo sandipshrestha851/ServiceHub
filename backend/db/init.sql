@@ -1,0 +1,6 @@
+CREATE TABLE customerInfo(
+    cust_id INT ALWAYS GENERATED AS IDENTITY PRIMARY KEY,
+    cust_name VARCHAR(100) NOT NULL,
+    cust_email VARCHAR(200) NOT NULL UNIQUE,
+    cust_PasswordHash VARCHAR(255) NOT NULL
+);
