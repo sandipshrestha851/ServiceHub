@@ -28,8 +28,8 @@ const Navbar = () => {
                  gap-1 items-center text-lg hover:underline cursor-pointer text-[#64748B] hover:text-[hsl(215,16%,37%)]"><img src="/images/star.png" alt="star" className="w-8" />Join as a Pro</li>
             </ul>
             <ul className="buttons flex justify-between gap-4">
-                <li><button className="register-btn py-1.5 px-4 text-lg rounded-[10px] font-semibold border border-[#E2E8F0] cursor-pointer text-[#0F172A] hover:bg-[hsl(0,0%,95%)]"><a href="/login">Login</a></button></li>
-                <li><button className="login-btn  py-1.5 px-7 text-lg rounded-[10px] bg-[hsl(221,83%,53%)] text-white font-semibold cursor-pointer hover:bg-[hsl(221,83%,48%)]"><a href="/signup">Register</a></button></li>
+                <li><button className="register-btn py-1.5 px-4 text-lg rounded-[10px] font-semibold border border-[#E2E8F0] cursor-pointer text-[#0F172A] hover:bg-[hsl(0,0%,95%)]"><a href="/auth/login">Login</a></button></li>
+                <li><button className="login-btn  py-1.5 px-7 text-lg rounded-[10px] bg-[hsl(221,83%,53%)] text-white font-semibold cursor-pointer hover:bg-[hsl(221,83%,48%)]"><a href="/auth/signup">Register</a></button></li>
             </ul>
         </div>
       </div>

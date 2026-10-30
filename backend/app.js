@@ -6,6 +6,8 @@ const authRouter = require("./routes/authRoutes")
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/auth",authRouter)
+
 
 const PORT = 8000
 app.listen(PORT,(error)=>{

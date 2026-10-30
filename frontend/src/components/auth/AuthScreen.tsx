@@ -1,6 +1,5 @@
-
 "use client";
-
+import {useRouter} from "next/navigation"
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -32,6 +31,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
   const isSignup = mode === "signup";
   const isProvider = role === "provider";
+  const router = useRouter()
 
   const theme = isProvider
     ? {
@@ -60,6 +60,17 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
         { icon: LockKeyhole, text: "Secure and reliable service" },
         { icon: CalendarCheck, text: "Fast and easy booking" },
       ];
+
+    // To navigate after submission of form
+    function handleSubmit(){
+        if(isSignup && !isProvider){
+          router.push("/auth/signup");
+        }else if(!isSignup && !isProvider){
+          router.push("/auth/login")
+        }else{
+          // some code
+        }
+    }
 
   return (
     <main
@@ -280,10 +291,9 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
             </div>
           </div>
 
-          {/* UI-only form */}
+          {/*form to register and login */}
           <form
-            onSubmit={(event) => event.preventDefault()}
-            className="space-y-4"
+            onSubmit={handleSubmit} className="space-y-4"
           >
             {isSignup && (
               <div>
@@ -449,7 +459,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
           <p className="mt-6 text-center text-sm text-[#64748B]">
             {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
             <Link
-              href={isSignup ? "/login" : "/signup"}
+              href={isSignup ? "/auth/login" : "/auth/signup"}
               className="font-semibold hover:underline"
               style={{ color: theme.primary }}
             >
