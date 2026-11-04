@@ -294,6 +294,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
           {/*form to register and login */}
           <form
             onSubmit={handleSubmit} className="space-y-4"
+            method="post"
           >
             {isSignup && (
               <div>

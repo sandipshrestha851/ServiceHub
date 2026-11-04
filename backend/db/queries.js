@@ -9,7 +9,7 @@ async function getUserCredentials(email){
     return result.rows[0];
 }
 
-modules.exports = [
+module.exports = [
     registerUser,
     getUserCredentials
 ]
