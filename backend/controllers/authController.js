@@ -70,6 +70,7 @@ exports.signupPost = [
             const { name, email, password, confirmPassword } = matchedData(req)
             const hashedPassword = await bcrypt.hash(password,12)
             await db.registerUser(name, email, hashedPassword)
+            return res.redirect("/auth/login")
         } catch (error) {
             throw error
         }

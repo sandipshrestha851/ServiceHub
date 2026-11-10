@@ -61,17 +61,6 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
         { icon: CalendarCheck, text: "Fast and easy booking" },
       ];
 
-    // To navigate after submission of form
-    function handleSubmit(){
-        if(isSignup && !isProvider){
-          router.push("/auth/signup");
-        }else if(!isSignup && !isProvider){
-          router.push("/auth/login")
-        }else{
-          // some code
-        }
-    }
-
   return (
     <main
       className="flex min-h-screen items-center justify-center bg-[#F8FAFC] p-4 sm:p-8"
@@ -293,7 +282,8 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
           {/*form to register and login */}
           <form
-            onSubmit={handleSubmit} className="space-y-4"
+            action ={`/api/auth/${mode}`}
+            className="space-y-4"
             method="post"
           >
             {isSignup && (
