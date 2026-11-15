@@ -110,3 +110,20 @@ exports.signupPost = [
         }
     }
 ]
+
+exports.loginPost=[
+    loginValidator,
+    async (req,res)=>{
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            //error code
+        }
+
+        try{
+            const {email,password} = matchedData(req)
+            const registerd_email = await db.getUserCredentials(email)
+        }catch(error){
+            throw error
+        }
+    }
+]
