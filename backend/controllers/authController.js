@@ -59,6 +59,40 @@ const signupValidator = [
         })
 ];
 
+const loginValidator =[
+    
+    // Email validation
+    body("email")
+        .trim()
+        .notEmpty()
+        .withMessage("Email is required.")
+        .bail()
+        .isEmail()
+        .withMessage("Enter a valid email address.")
+        .bail()
+        .normalizeEmail(),
+
+    // Password validation
+    body("password")
+        .notEmpty()
+        .withMessage("Password is required.")
+        .bail()
+        .isLength({ min: 8, max: 72 })
+        .withMessage("Password must be between 8 and 72 characters.")
+        .bail()
+        .matches(/[a-z]/)
+        .withMessage("Password must contain a lowercase letter.")
+        .bail()
+        .matches(/[A-Z]/)
+        .withMessage("Password must contain an uppercase letter.")
+        .bail()
+        .matches(/[0-9]/)
+        .withMessage("Password must contain a number.")
+        .bail()
+        .matches(/[^A-Za-z0-9]/)
+        .withMessage("Password must contain a special character."),
+]
+
 exports.signupPost = [
     signupValidator,
     async (req, res) => {
@@ -69,8 +103,8 @@ exports.signupPost = [
         try {
             const { name, email, password, confirmPassword } = matchedData(req)
             const hashedPassword = await bcrypt.hash(password,12)
-            await db.registerUser(name, email, hashedPassword)
-            return res.redirect("/auth/login")
+            await db.registerUser(name,email,hashedPassword)
+            return res.redirect(`${process.env.FRONTEND_URL}/auth/login`)
         } catch (error) {
             throw error
         }

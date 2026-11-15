@@ -6,6 +6,12 @@ const authRouter = require("./routes/authRoutes")
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req,res,next)=>{
+    console.log(`${req.method} ${req.url}`)
+    next()
+})
+
+//routes
 app.use("/auth",authRouter)
 
 
