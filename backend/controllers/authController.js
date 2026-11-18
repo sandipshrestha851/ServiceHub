@@ -121,7 +121,17 @@ exports.loginPost=[
 
         try{
             const {email,password} = matchedData(req)
-            const registerd_email = await db.getUserCredentials(email)
+            const user = await db.getUserCredentials(email)
+            const isPasswordValid = await bcrypt.compare(password,)
+            if(user.cust_email ===  email ){
+                if(isPasswordValid){
+                    return res.redirect(`${process.env.FROTEND_URL}/customer/dashboard`)
+                }else{
+                    //incorrect email or password
+                }
+            }else{
+                //incorrect email or password
+            }
         }catch(error){
             throw error
         }
