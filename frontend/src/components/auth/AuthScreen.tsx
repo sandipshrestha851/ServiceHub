@@ -24,6 +24,11 @@ type AuthScreenProps = {
 
 type Role = "customer" | "provider";
 
+type ValidationError = {
+    path: string;
+    msg: string;
+};
+
 export default function AuthScreen({ mode }: AuthScreenProps) {
   const [role, setRole] = useState<Role>("customer");
   const [showPassword, setShowPassword] = useState(false);

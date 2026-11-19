@@ -59,8 +59,8 @@ const signupValidator = [
         })
 ];
 
-const loginValidator =[
-    
+const loginValidator = [
+
     // Email validation
     body("email")
         .trim()
@@ -98,41 +98,45 @@ exports.signupPost = [
     async (req, res) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            //error display code
+            res.status(400).json({
+                errors: errors.array()
+            });
         }
         try {
             const { name, email, password, confirmPassword } = matchedData(req)
-            const hashedPassword = await bcrypt.hash(password,12)
-            await db.registerUser(name,email,hashedPassword)
-            return res.redirect(`${process.env.FRONTEND_URL}/auth/login`)
+            const hashedPassword = await bcrypt.hash(password, 12)
+            await db.registerUser(name, email, hashedPassword)
+            return res.status(201).json({
+                message: "User registered successfully"
+            });
         } catch (error) {
             throw error
         }
     }
 ]
 
-exports.loginPost=[
+exports.loginPost = [
     loginValidator,
-    async (req,res)=>{
+    async (req, res) => {
         const errors = validationResult(req)
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             //error code
         }
 
-        try{
-            const {email,password} = matchedData(req)
+        try {
+            const { email, password } = matchedData(req)
             const user = await db.getUserCredentials(email)
-            const isPasswordValid = await bcrypt.compare(password,user.cust_passwordHash)
-            if(user.cust_email ===  email ){
-                if(isPasswordValid){
+            const isPasswordValid = await bcrypt.compare(password, user.cust_passwordHash)
+            if (user.cust_email === email) {
+                if (isPasswordValid) {
                     return res.redirect(`${process.env.FROTEND_URL}/customer/dashboard`)
-                }else{
+                } else {
                     //incorrect email or password
                 }
-            }else{
+            } else {
                 //incorrect email or password
             }
-        }catch(error){
+        } catch (error) {
             throw error
         }
     }

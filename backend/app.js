@@ -12,7 +12,7 @@ app.use((req,res,next)=>{
 })
 
 //routes
-app.use("/auth",authRouter)
+app.use("/api/auth",authRouter)
 
 
 const PORT = 8000
