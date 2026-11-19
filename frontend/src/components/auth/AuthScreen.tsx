@@ -61,6 +61,47 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
         { icon: CalendarCheck, text: "Fast and easy booking" },
       ];
 
+    const [errors,setErrors] = useState<Record<string,string>>({})
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const handleSignup = async (e: React.SubmitEvent)=>{
+      e.preventDefault();
+
+      setErrors({})
+      const response = await fetch(
+        `${process.env.BACKEND_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            confirmPassword
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if(!response.ok){
+        const formattedErrors: Record<string,string> = {};
+
+        data.errors.array.forEach((error: ValidationError) => {
+          formattedErrors[error.path] = error.msg;
+        });
+        setErrors(formattedErrors)
+        return;
+      }
+
+      router.push(`${process.env.FRONTEND_URL}/auth/login`)
+    }
+
   return (
     <main
       className="flex min-h-screen items-center justify-center bg-[#F8FAFC] p-4 sm:p-8"
@@ -282,9 +323,8 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
           {/*form to register and login */}
           <form
-            action ={`/api/auth/${mode}`}
+            onSubmit = {handleSignup}
             className="space-y-4"
-            method="post"
           >
             {isSignup && (
               <div>
@@ -305,6 +345,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     type="text"
                     autoComplete="name"
                     placeholder="Enter your full name"
+                    onChange = {(e)=> setName(e.target.value)}
                     className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-4 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                   />
                 </div>
@@ -329,6 +370,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                   type="email"
                   autoComplete="email"
                   placeholder="you@example.com"
+                  onChange = {(e)=> setEmail(e.target.value)}
                   className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-4 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                 />
               </div>
@@ -354,6 +396,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     isSignup ? "new-password" : "current-password"
                   }
                   placeholder="Enter your password"
+                  onChange = {(e)=> setPassword(e.target.value)}
                   className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-12 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                 />
                 <button
@@ -386,6 +429,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     placeholder="Re-enter your password"
+                    onChange = {(e)=> setConfirmPassword(e.target.value)}
                     className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-12 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                   />
                   <button
