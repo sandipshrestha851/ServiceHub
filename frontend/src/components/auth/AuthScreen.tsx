@@ -1,5 +1,5 @@
 "use client";
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -25,8 +25,8 @@ type AuthScreenProps = {
 type Role = "customer" | "provider";
 
 type ValidationError = {
-    path: string;
-    msg: string;
+  path: string;
+  msg: string;
 };
 
 export default function AuthScreen({ mode }: AuthScreenProps) {
@@ -40,44 +40,45 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
   const theme = isProvider
     ? {
-        primary: "#DC2626",
-        dark: "#B91C1C",
-        light: "#FEF2F2",
-        border: "#FECACA",
-        muted: "#FEE2E2",
-      }
+      primary: "#DC2626",
+      dark: "#B91C1C",
+      light: "#FEF2F2",
+      border: "#FECACA",
+      muted: "#FEE2E2",
+    }
     : {
-        primary: "#2563EB",
-        dark: "#1D4ED8",
-        light: "#EFF6FF",
-        border: "#BFDBFE",
-        muted: "#DBEAFE",
-      };
+      primary: "#2563EB",
+      dark: "#1D4ED8",
+      light: "#EFF6FF",
+      border: "#BFDBFE",
+      muted: "#DBEAFE",
+    };
 
   const benefits = isProvider
     ? [
-        { icon: TrendingUp, text: "Get more bookings" },
-        { icon: CalendarCheck, text: "Manage your schedule" },
-        { icon: ShieldCheck, text: "Build your reputation" },
-      ]
+      { icon: TrendingUp, text: "Get more bookings" },
+      { icon: CalendarCheck, text: "Manage your schedule" },
+      { icon: ShieldCheck, text: "Build your reputation" },
+    ]
     : [
-        { icon: ShieldCheck, text: "Verified professionals" },
-        { icon: LockKeyhole, text: "Secure and reliable service" },
-        { icon: CalendarCheck, text: "Fast and easy booking" },
-      ];
+      { icon: ShieldCheck, text: "Verified professionals" },
+      { icon: LockKeyhole, text: "Secure and reliable service" },
+      { icon: CalendarCheck, text: "Fast and easy booking" },
+    ];
 
-    const [errors,setErrors] = useState<Record<string,string>>({})
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSignup = async (e: React.SubmitEvent)=>{
-      e.preventDefault();
+  const handleSignup = async (e: React.SubmitEvent) => {
+    e.preventDefault();
 
-      setErrors({})
+    setErrors({})
+    if (isSignup) {
       const response = await fetch(
-        `${process.env.BACKEND_URL}/api/auth/signup`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/signup`,
         {
           method: "POST",
           headers: {
@@ -94,18 +95,49 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
       const data = await response.json();
 
-      if(!response.ok){
-        const formattedErrors: Record<string,string> = {};
+      if (!response.ok) {
+        const formattedErrors: Record<string, string> = {};
 
-        data.errors.array.forEach((error: ValidationError) => {
+        data.errors.forEach((error: ValidationError) => {
           formattedErrors[error.path] = error.msg;
         });
         setErrors(formattedErrors)
+        console.log(errors)
         return;
       }
 
-      router.push(`${process.env.FRONTEND_URL}/auth/login`)
+      router.push(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/auth/login`)
+    } else {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const formattedErrors: Record<string, string> = {};
+
+        data.errors.forEach((error: ValidationError) => {
+          formattedErrors[error.path] = error.msg;
+        });
+        setErrors(formattedErrors)
+        console.log(errors)
+        return;
+      }
+
+      router.push(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/dashboard`)
     }
+  }
 
   return (
     <main
@@ -328,7 +360,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
           {/*form to register and login */}
           <form
-            onSubmit = {handleSignup}
+            onSubmit={handleSignup}
             className="space-y-4"
           >
             {isSignup && (
@@ -350,10 +382,15 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     type="text"
                     autoComplete="name"
                     placeholder="Enter your full name"
-                    onChange = {(e)=> setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-4 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                   />
                 </div>
+
+                {errors.name && (
+                  <p className="text-sm text-red-500 font-medium mt-1">{errors.name}</p>
+                )}
+
               </div>
             )}
 
@@ -375,10 +412,13 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                   type="email"
                   autoComplete="email"
                   placeholder="you@example.com"
-                  onChange = {(e)=> setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-4 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                 />
               </div>
+              {errors.email && (
+                <p className="text-sm text-red-500 font-medium mt-1">{errors.email}</p>
+              )}
             </div>
 
             <div>
@@ -401,7 +441,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     isSignup ? "new-password" : "current-password"
                   }
                   placeholder="Enter your password"
-                  onChange = {(e)=> setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-12 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                 />
                 <button
@@ -413,6 +453,9 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-sm text-red-500 font-medium mt-1">{errors.password}</p>
+              )}
             </div>
 
             {isSignup && (
@@ -434,7 +477,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     placeholder="Re-enter your password"
-                    onChange = {(e)=> setConfirmPassword(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full rounded-xl border border-[#E2E8F0] py-3 pl-11 pr-12 text-sm text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-(--auth-primary) focus:ring-4 focus:ring-blue-100/60"
                   />
                   <button
@@ -454,6 +497,9 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
                     )}
                   </button>
                 </div>
+                {errors.confirmPassword && (
+                  <p className="text-sm text-red-500 font-medium mt-1">{errors.confirmPassword}</p>
+                )}
               </div>
             )}
 

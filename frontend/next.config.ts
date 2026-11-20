@@ -1,15 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/auth/:path*",
-        destination: `${process.env.BACKEND_URL}/auth/:path*`,
-      },
-    ];
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
-
