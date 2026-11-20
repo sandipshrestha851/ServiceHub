@@ -60,38 +60,18 @@ const signupValidator = [
 ];
 
 const loginValidator = [
-
-    // Email validation
     body("email")
         .trim()
         .notEmpty()
         .withMessage("Email is required.")
         .bail()
         .isEmail()
-        .withMessage("Enter a valid email address.")
-        .bail()
-        .normalizeEmail(),
+        .withMessage("Enter a valid email address."),
 
-    // Password validation
     body("password")
         .notEmpty()
         .withMessage("Password is required.")
-        .bail()
-        .isLength({ min: 8, max: 72 })
-        .withMessage("Password must be between 8 and 72 characters.")
-        .bail()
-        .matches(/[a-z]/)
-        .withMessage("Password must contain a lowercase letter.")
-        .bail()
-        .matches(/[A-Z]/)
-        .withMessage("Password must contain an uppercase letter.")
-        .bail()
-        .matches(/[0-9]/)
-        .withMessage("Password must contain a number.")
-        .bail()
-        .matches(/[^A-Za-z0-9]/)
-        .withMessage("Password must contain a special character."),
-]
+];
 
 exports.signupPost = [
     signupValidator,
@@ -120,22 +100,31 @@ exports.loginPost = [
     async (req, res) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            //error code
+            res.status(400).json({
+                errors: errors.array()
+            })
         }
 
         try {
             const { email, password } = matchedData(req)
             const user = await db.getUserCredentials(email)
-            const isPasswordValid = await bcrypt.compare(password, user.cust_passwordHash)
+            const isPasswordValid = await bcrypt.compare(password, user.cust_passwordhash)
             if (user.cust_email === email) {
                 if (isPasswordValid) {
-                    return res.redirect(`${process.env.FROTEND_URL}/customer/dashboard`)
-                } else {
-                    //incorrect email or password
+                    return res.status(201).json({
+                        message: "User logged in successfully"
+                    });
                 }
-            } else {
-                //incorrect email or password
             }
+
+            return res.status(400).json({
+                errors: [
+                    {
+                        path: "password",
+                        msg: "Invalid email or password."
+                    }
+                ]
+            })
         } catch (error) {
             throw error
         }

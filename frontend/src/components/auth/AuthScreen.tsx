@@ -135,7 +135,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
         return;
       }
 
-      router.push(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/dashboard`)
+      router.push(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/customer/dashboard`)
     }
   }
 
