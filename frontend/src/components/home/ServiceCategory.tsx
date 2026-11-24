@@ -1,5 +1,5 @@
 import React from 'react'
-import ServiceCard from '../ui/ServiceCard'
+import CategoryCard from '../ui/CategoryCard'
 import {
     Wrench,
     Zap,
@@ -21,56 +21,56 @@ const Services = () => {
             </div>
             <div className="services-container mt-5 grid grid-cols-4 gap-5">
 
-                <ServiceCard
+                <CategoryCard
                     title="Plumbing"
                     description="Leaks,repairs and installations"
                     providers={146}
                     icon={Wrench}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Electrical"
                     description="Safe fixes & smart upgrades"
                     providers={96}
                     icon={Zap}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Cleaning"
                     description="Fresh spaces, less stress"
                     providers={214}
                     icon={Sparkles}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Carpentry"
                     description="Built beautifully for you"
                     providers={74}
                     icon={Package}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Appliance Repair"
                     description="Keep your home running"
                     providers={89}
                     icon={House}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Painting"
                     description="Color your world"
                     providers={61}
                     icon={SlidersHorizontal}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Vehicle Repair"
                     description="Back on the road quickly"
                     providers={52}
                     icon={Briefcase}
                 />
 
-                <ServiceCard
+                <CategoryCard
                     title="Computer Repair"
                     description="Tech help that makes sense"
                     providers={43}

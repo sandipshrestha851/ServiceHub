@@ -1,40 +1,29 @@
-import { LucideIcon } from "lucide-react";
+import React from 'react'
+import {Star} from 'lucide-react'
 
-interface ServiceCardProps {
-  title: string;
-  description: string;
-  providers: number;
-  icon: LucideIcon;
-}
-
-export default function ServiceCard({
-  title,
-  description,
-  providers,
-  icon: Icon,
-}: ServiceCardProps) {
+const ServiceCard = () => {
   return (
-    <div className="w-78.75 h-47 rounded-2xl border border-slate-200 bg-white p-6">
-      
-      {/* Icon */}
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50">
-        <Icon className="h-5 w-5 text-blue-600" />
+    <div className="border bg-white rounded-2xl">
+        {/* image */}
+      <div className="image h-1/2 w-full rounded-2xl">
+        <img src="/images/sample.png" alt="" className="w-full h-full object-cover" />
       </div>
 
-      {/* Content */}
-      <div className="mt-5">
-        <h3 className="text-base font-semibold text-slate-950">
-          {title}
-        </h3>
+      {/* description */}
+      <div className="description">
+        <h1 className="title">Cheapest pubmling here</h1>
+        <p className="category-name">Plumbing</p>
 
-        <p className="mt-2 text-sm text-[#64748B]">
-          {description}
-        </p>
+        <div className="ratings flex items-center gap-1">
+          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+          <span>5</span>
+          <span className="text-sm text-gray-500">(23)</span>
+        </div>
 
-        <p className="mt-4 text-xs text-[#64748B] font-semibold">
-          {providers} providers
-        </p>
+        <p className="price"></p>
       </div>
     </div>
-  );
+  )
 }
+
+export default ServiceCard
