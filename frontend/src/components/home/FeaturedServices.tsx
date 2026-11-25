@@ -5,7 +5,7 @@ const FeaturedServices = () => {
     return (
         <div className="mt-20 mx-40">
             {/* cards */}
-            <div className="cards grid grid-cols-4 gap-13">
+            <div className="cards grid grid-cols-4 gap-8">
                 <ServiceCard />
                 <ServiceCard />
                 <ServiceCard />
